@@ -31,7 +31,7 @@ export class createDestination1603853687175 implements MigrationInterface {
                     type: 'varchar',
                 },
                 {
-                    name: 'adress',
+                    name: 'address',
                     type: 'varchar',      
                 },
                 {
@@ -55,6 +55,7 @@ export class createDestination1603853687175 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.dropTable('destinations');
     }
 
 }
