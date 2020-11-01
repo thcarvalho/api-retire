@@ -9,7 +9,12 @@ export default {
 
     const destinationsRepository = getRepository(Destinations);
 
-    const destinations = await destinationsRepository.find({ address: Like(`%${address}%`) });
+    const destinations = await destinationsRepository.find({
+      where: {
+        address: Like(`%${address}%`)
+      },
+      relations: ['images']
+    });
 
     return res.json(DestinationsView.renderMany(destinations));
   }
