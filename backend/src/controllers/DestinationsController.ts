@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { getRepository } from "typeorm";
 import Destinations from "../models/Destinations";
+import DestinationsView from "../views/DestinationsView";
 
 export default {
   async create(req: Request, res: Response) {
@@ -50,7 +51,7 @@ export default {
       relations: ['images']
     });
 
-    return res.json(destinations);
+    return res.json(DestinationsView.renderMany(destinations));
   },
 
   async show(req: Request, res: Response) {
@@ -61,6 +62,6 @@ export default {
       relations: ['images']
     });
 
-    return res.json(destination);
+    return res.json(DestinationsView.render(destination));
   }
 }
