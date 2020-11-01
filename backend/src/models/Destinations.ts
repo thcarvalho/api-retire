@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import Images from "./Images";
 
 @Entity('destinations')
 export default class Destinations {
@@ -27,5 +28,11 @@ export default class Destinations {
   latitude: number;
 
   @Column()
-  longitude: number
+  longitude: number;
+
+  @OneToMany(() => Images, image => image.destination,  {
+    cascade: ['insert', 'update']
+  })
+  @JoinColumn({name: 'destination_id'})
+  images: Images[]
 }

@@ -4,9 +4,39 @@ import Destinations from "../models/Destinations";
 
 export default {
   async create(req: Request, res: Response) {
+    const {
+      name,
+      phone,
+      email,
+      opening_hours,
+      address,
+      cep,
+      latitude,
+      longitude
+    } = req.body;
+
     const destinationsRepository = getRepository(Destinations);
 
-    const destination = destinationsRepository.create(req.body);
+    const reqImages = req.files as Express.Multer.File[];
+    const images = reqImages.map(image => {
+      return {
+        path: image.filename
+      }
+    })
+
+    const data = {
+      name,
+      phone,
+      email,
+      opening_hours,
+      address,
+      cep,
+      latitude,
+      longitude,
+      images
+    }
+
+    const destination = destinationsRepository.create(data);
 
     await destinationsRepository.save(destination);
 
@@ -16,7 +46,9 @@ export default {
   async index(req: Request, res: Response) {
     const destinationsRepository = getRepository(Destinations);
 
-    const destinations = await destinationsRepository.find();
+    const destinations = await destinationsRepository.find({
+      relations: ['images']
+    });
 
     return res.json(destinations);
   },
@@ -25,7 +57,9 @@ export default {
     const { id } = req.params;
     const destinationsRepository = getRepository(Destinations);
 
-    const destination = await destinationsRepository.findOneOrFail(id);
+    const destination = await destinationsRepository.findOneOrFail(id, {
+      relations: ['images']
+    });
 
     return res.json(destination);
   }
