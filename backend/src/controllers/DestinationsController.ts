@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { getRepository } from "typeorm";
 import Destinations from "../models/Destinations";
 import DestinationsView from "../views/DestinationsView";
+import * as Yup from 'yup';
 
 export default {
   async create(req: Request, res: Response) {
@@ -36,6 +37,26 @@ export default {
       longitude,
       images
     }
+
+    const schema = Yup.object().shape({
+      name: Yup.string().required(),
+      phone: Yup.number().required().min(8),
+      email: Yup.string().email(),
+      opening_hours: Yup.string().required(),
+      address: Yup.string().required(),
+      cep: Yup.number().required().min(8),
+      latitude: Yup.number().required(),
+      longitude: Yup.number().required(),
+      images:Yup.array(
+        Yup.object().shape({
+          path: Yup.string().required()
+        })
+      )
+    })
+
+    await schema.validate(data, {
+      abortEarly: false,
+    })
 
     const destination = destinationsRepository.create(data);
 
