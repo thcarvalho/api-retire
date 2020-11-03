@@ -5,14 +5,15 @@ import DestinationsView from '../views/DestinationsView';
 
 export default {
   async index(req: Request, res: Response) {
-    const { address } = req.query;
+    const { search } = req.query;
 
     const destinationsRepository = getRepository(Destinations);
 
     const destinations = await destinationsRepository.find({
-      where: {
-        address: Like(`%${address}%`)
-      },
+      where: [
+        { address: Like(`%${search}%`) },
+        { name: Like(`%${search}%`)}
+      ],
       relations: ['images']
     });
 
