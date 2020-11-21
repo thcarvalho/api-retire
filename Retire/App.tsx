@@ -6,7 +6,7 @@ function App() {
     <View>
       <Text>Hello World</Text>
     </View>
-  ) 
+  );
 }
 
 export default App;
