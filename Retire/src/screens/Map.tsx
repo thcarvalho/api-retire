@@ -1,20 +1,14 @@
 import MapboxGL from '../services/mapbox';
 import React from 'react';
-import { Dimensions, View } from 'react-native';
+import { Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { BarsMenu, DestinationsSearch } from '../styles/screens/map';
 import colors from '../styles/colors';
-
-// import { Container } from './styles';
+import { Container } from '../styles/global';
 
 const Map: React.FC = () => {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}>
+    <Container>
       <MapboxGL.MapView
         // logoEnabled={false}
         // attributionEnabled={false}
@@ -36,7 +30,7 @@ const Map: React.FC = () => {
         placeholderTextColor={colors.main_grey}
         placeholder="Digite aqui sua pesquisa"
       />
-    </View>
+    </Container>
   );
 };
 
