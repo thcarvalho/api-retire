@@ -6,4 +6,6 @@ export default {
   second_grey: '#F4F4F4',
   third_grey: '#F2F2F2',
   bold_grey: '#4A4A4A',
+  text_grey: '#A1A1A1',
+  main_blue: '#36A5C9',
 };
