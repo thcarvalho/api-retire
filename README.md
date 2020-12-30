@@ -55,8 +55,8 @@ Com todas as ferramentas necessárias instaladas, clone e rode a versão [Mobile
 
 ```
 # clone este repósitório
-$ git clone https://github.com/thcarvalho/Re-tire
-$ cd Re-tire
+$ git clone https://github.com/thcarvalho/api-retire
+$ cd api-retire
 
 # instalando as dependências
 $ npm install
